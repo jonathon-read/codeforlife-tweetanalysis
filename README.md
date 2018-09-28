@@ -6,9 +6,9 @@
 ### NLP
 - [ ] Tidy `sentiment140` dataset
 - [ ] Weakly-supervised sentiment classification on tweets using
-- [ ] lexical association
-- [ ] distributional similarity
-- [ ] embedding distances
+  - [ ] lexical association
+  - [ ] distributional similarity
+  - [ ] embedding distances
 
 ### Interface
 - [ ] tweet list, with updatable categories
