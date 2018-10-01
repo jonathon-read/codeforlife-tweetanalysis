@@ -1,6 +1,5 @@
 # codeforlife-tweetanalysis
 
-
 ## TODO
 
 ### NLP
