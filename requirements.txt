@@ -1,7 +1,7 @@
-dask
 flask
 langid
 pandas
 scikit-learn
 spacy
 tqdm
+yaml

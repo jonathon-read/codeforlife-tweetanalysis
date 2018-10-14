@@ -1,9 +1,7 @@
-# codeforlife-tweetanalysis
-
 ## TODO
 
 ### NLP
-- [ ] Tidy `sentiment140` dataset
+- [X] Tidy `sentiment140` dataset
 - [ ] Weakly-supervised sentiment classification on tweets using
   - [ ] lexical association
   - [ ] distributional similarity
