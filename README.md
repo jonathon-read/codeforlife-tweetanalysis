@@ -22,6 +22,5 @@
 Sentiment140 dataset (http://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip)
 
 spacy's optional models:
-* `python -m spacy download en`
 * `python -m spacy download en_core_web_lg`
 

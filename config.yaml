@@ -1,0 +1,7 @@
+sentiment140:
+  robots:
+    - lost_dog
+    - webwoke
+    - tweetpet
+  training: training.1600000.processed.noemoticon.csv
+  url: http://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip

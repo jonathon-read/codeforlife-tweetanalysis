@@ -3,5 +3,6 @@ langid
 pandas
 scikit-learn
 spacy
+sqlite
 tqdm
 yaml
