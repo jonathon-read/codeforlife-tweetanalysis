@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
+import html
 import langid
 import os
 import pandas as pd
@@ -65,12 +66,20 @@ def main():
 
     df = extract_data(config['training'], path_to_archive)
     df = df[~df.user.isin(config['robots'])]
-    df = df.sample(frac=1.0)
+    df = df.sample(frac=1.0, random_state=42)
 
     if args.features == 'lemmas':
         get_features = get_lemmas
     elif args.features == 'lemmas_pos':
         get_features = get_lemmas_with_pos
+
+    feature_cache = dict()
+    with open('{}.cache'.format(args.features), 'rt') as file_obj:
+        for line in file_obj:
+            tweet, features = line.split('§')
+            feature_cache[tweet] = features
+
+    cache_file_obj = open('{}.cache'.format(args.features), 'at')
 
     with tqdm(total=len(df)) as progress:
         for split, sentiment, subset_df in get_subsets(df, args.test_ratio):
@@ -78,9 +87,24 @@ def main():
             progress.set_description(path)
             with open(path, 'wt') as file_obj:
                 for tweet in subset_df['tweet'].values:
-                    if langid.classify(tweet) == 'en':
-                        file_obj.write('\t'.join(get_features(tweet)))
+
+                    tweet = html.unescape(tweet)
+
+                    if 'we.will.never.sleep.cause.sleep.' in tweet:
+                        tweet = tweet.replace('.', ' ')
+
+                    if langid.classify(tweet)[0] == 'en':
+                        try:
+                            features = feature_cache[tweet]
+                        except KeyError:
+                            features = '\t'.join(get_features(tweet))
+                            feature_cache[tweet] = features
+                            cache_file_obj.write('{}§{}\n'.format(tweet, features))
+                            cache_file_obj.flush()
+                        file_obj.write(features + '\n')
                     progress.update()
+
+    cache_file_obj.close()
 
 
 

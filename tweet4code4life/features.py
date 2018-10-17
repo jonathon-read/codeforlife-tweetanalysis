@@ -7,7 +7,7 @@ _nlp = None
 _spacy_model = 'en_core_web_lg'
 
 
-def _spacy(text, ncores=-1, disable=[]):
+def _spacy(text, disable=[]):
 
     global _nlp
 
@@ -15,7 +15,7 @@ def _spacy(text, ncores=-1, disable=[]):
         logging.info('loading spacy model {}'.format(_spacy_model))
         _nlp = spacy.load(_spacy_model)
 
-    return _nlp(text, ncores=ncores, disable=disable)
+    return _nlp(text, disable=disable)
 
 
 def get_lemmas(text):
